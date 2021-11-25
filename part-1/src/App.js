@@ -1,6 +1,6 @@
 import React from "react";
 import SecondPart from './part-1b/SecondPart'
-import Examples from "./exercices/Examples";
+import Examples from "./examples/Examples";
 import Unicafe from "./part-1d/Unicafe";
 import Anecdotes from "./part-1d/Anecdotes";
 
