@@ -5,6 +5,6 @@ Here are all exercices from part 1
 ### `npm start` 
 
 ## To start part-2 on localhost:3000 :
-Here are all exercices from part 1
+Here are all exercices from part 2
 ### `cd part-2` 
 ### `yarn start` 
