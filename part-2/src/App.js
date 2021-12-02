@@ -1,5 +1,6 @@
 import React from "react";
 import Course from './components/part-2a/Course'
+import PhoneBook from './components/part-2b/PhoneBook'
 import './index.css';
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
     <>
       <h3 style={{ padding: '0.25rem 0.5rem', background: 'lightblue', color: 'black', width: 'max-content' }}>Exercises 2.1.-2.5.</h3>
       <Course courses={courses} />
+      <hr />
+      <h3 style={{ padding: '0.25rem 0.5rem', background: 'lightblue', color: 'black', width: 'max-content' }}>Exercises 2.6.-2.10.</h3>
+      <PhoneBook />
       <hr />
     </>
   )
