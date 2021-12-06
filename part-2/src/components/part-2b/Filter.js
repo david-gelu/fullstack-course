@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-const Filter = ({ persons, setPersons }) => {
+const Filter = ({ persons, setPersonsSearch }) => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    setPersons(persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase())))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search])
+    setPersonsSearch(persons.filter(person => person.name.toLowerCase().includes(search.toLowerCase())))
+  }, [persons, search, setPersonsSearch])
 
   const searchName = (event) => {
     setSearch(event.target.value)

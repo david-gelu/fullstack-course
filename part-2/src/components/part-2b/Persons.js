@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Persons = ({ persons, newName }) => {
+const Persons = ({ personsSearch, newName }) => {
 
   return (
     <>
-      {persons.map(person =>
+      {personsSearch.map(person =>
         person.name !== newName ?
           <p key={person.id}>{person.name} {person.number}</p>
           : window.alert(`${newName} already exists in phonebok`)

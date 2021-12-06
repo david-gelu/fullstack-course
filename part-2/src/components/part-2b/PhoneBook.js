@@ -7,6 +7,7 @@ import axios from 'axios'
 
 const PhoneBook = () => {
   const [persons, setPersons] = useState([])
+  const [personsSearch, setPersonsSearch] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
 
@@ -24,7 +25,7 @@ const PhoneBook = () => {
       <div>
         <Filter
           persons={persons}
-          setPersons={setPersons} />
+          setPersonsSearch={setPersonsSearch} />
         <br />
         <h3> Add new contact</h3>
         <PersonForm
@@ -36,7 +37,7 @@ const PhoneBook = () => {
           setNewNumber={setNewNumber} />
       </div>
       <h2>Numbers</h2>
-      <Persons persons={persons} newName={newName} />
+      <Persons personsSearch={personsSearch} newName={newName} />
     </div>
   )
 }
