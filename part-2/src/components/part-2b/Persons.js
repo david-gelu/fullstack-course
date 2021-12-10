@@ -1,13 +1,31 @@
-import React from 'react'
+import personService from './services/services'
 
-const Persons = ({ personsSearch, newName }) => {
+const Persons = ({ personsSearch, persons, setPersons, setIdNr, setErrorMsg }) => {
+
+  const deletePerson = (id) => {
+    const person = persons.length && persons.find(n => n.id === id)
+    const changedPersons = { ...person, id: person.id }
+    personService
+      .deletePers(id, changedPersons)
+      .then(changedPersons => {
+        setPersons(changedPersons.id !== id ? person : changedPersons)
+      })
+      .catch(error => {
+        setErrorMsg(`${changedPersons} was already deleted from server`)
+        setTimeout(() => { setErrorMsg(null) }, 5000)
+      })
+  }
 
   return (
     <>
       {personsSearch.map(person =>
-        person.name !== newName ?
-          <p key={person.id}>{person.name} {person.number}</p>
-          : window.alert(`${newName} already exists in phonebok`)
+        <div key={person.id}  >
+          <p>{person.name} {person.number}</p>
+          <button onClick={() => {
+            setIdNr(person.id)
+            window.confirm(`delete ${person.name}`) && deletePerson(person.id)
+          }}>delete </button>
+        </div>
       )}
     </>
   )

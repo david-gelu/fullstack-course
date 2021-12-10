@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persons'
-import axios from 'axios'
-
 
 const PhoneBook = () => {
   const [persons, setPersons] = useState([])
   const [personsSearch, setPersonsSearch] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
-  }, [])
-
+  const [errorMsg, setErrorMsg] = useState('')
+  const [configMsg, setConfigMsg] = useState('')
+  const [idNr, setIdNr] = useState('')
   return (
     <div>
       <h2>Phonebook</h2>
+      {errorMsg
+        ? <h3 className={`${errorMsg ? 'erorr' : ''}`}>{errorMsg}</h3>
+        : <h3 className={`${configMsg ? 'success' : ''}`}>{configMsg}</h3>}
       <div>
         <Filter
           persons={persons}
@@ -34,10 +29,22 @@ const PhoneBook = () => {
           newName={newName}
           setNewName={setNewName}
           newNumber={newNumber}
-          setNewNumber={setNewNumber} />
+          setNewNumber={setNewNumber}
+          personsSearch={personsSearch}
+          setIdNr={setIdNr}
+          idNr={idNr}
+          setConfigMsg={setConfigMsg}
+          setErrorMsg={setErrorMsg}
+        />
       </div>
       <h2>Numbers</h2>
-      <Persons personsSearch={personsSearch} newName={newName} />
+      <Persons
+        personsSearch={personsSearch}
+        persons={persons}
+        setPersons={setPersons}
+        setIdNr={setIdNr}
+        setErrorMsg={setErrorMsg}
+      />
     </div>
   )
 }
