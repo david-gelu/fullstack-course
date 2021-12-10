@@ -23,7 +23,6 @@ const PhoneBook = () => {
         <br />
         <h3> Add new contact</h3>
         <PersonForm
-          persons={persons}
           setPersons={setPersons}
           newName={newName}
           setNewName={setNewName}

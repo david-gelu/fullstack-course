@@ -41,14 +41,6 @@ const PersonForm = ({ setPersons, setNewName, setNewNumber, newName, newNumber, 
             setConfigMsg(`${updatePersonNr.name} was successfully updated`)
             setTimeout(() => { setConfigMsg(null) }, 5000)
           })
-          .catch((error) => {
-            console.log(error)
-            setPersons(personsSearch.filter(person => person.id !== updatePersonNr.id))
-            setNewName('')
-            setNewNumber('')
-            setErrorMsg(`${updatePersonNr.name} was already deleted from server`)
-            setTimeout(() => { setErrorMsg(null) }, 5000)
-          })
       }
     } else {
       const addPerson = {
