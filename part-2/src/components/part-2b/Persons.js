@@ -1,6 +1,6 @@
 import personService from './services/services'
 
-const Persons = ({ personsSearch, persons, setPersons, setIdNr, setErrorMsg }) => {
+const Persons = ({ personsSearch, persons, setPersons, setErrorMsg }) => {
 
   const deletePerson = (id) => {
     const person = persons.length && persons.find(n => n.id === id)
@@ -22,7 +22,6 @@ const Persons = ({ personsSearch, persons, setPersons, setIdNr, setErrorMsg }) =
         <div key={person.id}  >
           <p>{person.name} {person.number}</p>
           <button onClick={() => {
-            setIdNr(person.id)
             window.confirm(`delete ${person.name}`) && deletePerson(person.id)
           }}>delete </button>
         </div>

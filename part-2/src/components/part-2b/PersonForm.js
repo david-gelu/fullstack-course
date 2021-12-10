@@ -2,19 +2,16 @@ import { useEffect, useState } from 'react'
 import Note from './Notes'
 import personService from './services/services'
 
-const PersonForm = ({ persons, setPersons, setNewName, setNewNumber, newName, newNumber, personsSearch, setIdNr, idNr, setConfigMsg, setErrorMsg }) => {
+const PersonForm = ({ setPersons, setNewName, setNewNumber, newName, newNumber, personsSearch, setConfigMsg, setErrorMsg }) => {
   const [showAll, setShowAll] = useState(false)
 
 
   const handleNameChange = (e) => {
     setNewName(e.target.value)
-    setIdNr(idNr)
   }
 
   const handleNrChange = (e) => {
     setNewNumber(e.target.value)
-    setIdNr(idNr)
-
   }
   useEffect(() => {
     personService
@@ -27,18 +24,18 @@ const PersonForm = ({ persons, setPersons, setNewName, setNewNumber, newName, ne
 
   const addPerson = (e) => {
     e.preventDefault()
-    const person = persons.filter((person) =>
+    const person = personsSearch.filter((person) =>
       person.name === newName
     )
-    console.log(person);
     const addPerson = person[0]
     const updatePersonNr = { ...addPerson, number: newNumber }
 
     if (person.length !== 0) {
+      if (addPerson.name === newName) window.alert(`${addPerson.name} is already added to the phonebook`)
       if (window.confirm(`${addPerson.name} is already added to the phonebook, update phone number?`)) {
         personService
           .update(updatePersonNr.id, updatePersonNr).then(returnedPerson => {
-            setPersons(persons.map(personItem => personItem.id !== addPerson.id ? personItem : returnedPerson))
+            setPersons(personsSearch.map(personItem => personItem.id !== addPerson.id ? personItem : returnedPerson))
             setNewName('')
             setNewNumber('')
             setConfigMsg(`${updatePersonNr.name} was successfully updated`)
@@ -46,7 +43,7 @@ const PersonForm = ({ persons, setPersons, setNewName, setNewNumber, newName, ne
           })
           .catch((error) => {
             console.log(error)
-            setPersons(persons.filter(person => person.id !== updatePersonNr.id))
+            setPersons(personsSearch.filter(person => person.id !== updatePersonNr.id))
             setNewName('')
             setNewNumber('')
             setErrorMsg(`${updatePersonNr.name} was already deleted from server`)
@@ -63,7 +60,7 @@ const PersonForm = ({ persons, setPersons, setNewName, setNewNumber, newName, ne
       personService
         .create(addPerson)
         .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
+          setPersons(personsSearch.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
           setConfigMsg(
@@ -71,14 +68,6 @@ const PersonForm = ({ persons, setPersons, setNewName, setNewNumber, newName, ne
           )
           setTimeout(() => {
             setConfigMsg(null)
-          }, 5000)
-        })
-        .catch(error => {
-          setErrorMsg(
-            `${error.response.data.error}`
-          )
-          setTimeout(() => {
-            setErrorMsg(null)
           }, 5000)
         })
     }

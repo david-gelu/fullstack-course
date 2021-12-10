@@ -10,7 +10,6 @@ const PhoneBook = () => {
   const [newNumber, setNewNumber] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [configMsg, setConfigMsg] = useState('')
-  const [idNr, setIdNr] = useState('')
   return (
     <div>
       <h2>Phonebook</h2>
@@ -31,8 +30,6 @@ const PhoneBook = () => {
           newNumber={newNumber}
           setNewNumber={setNewNumber}
           personsSearch={personsSearch}
-          setIdNr={setIdNr}
-          idNr={idNr}
           setConfigMsg={setConfigMsg}
           setErrorMsg={setErrorMsg}
         />
@@ -42,7 +39,6 @@ const PhoneBook = () => {
         personsSearch={personsSearch}
         persons={persons}
         setPersons={setPersons}
-        setIdNr={setIdNr}
         setErrorMsg={setErrorMsg}
       />
     </div>
