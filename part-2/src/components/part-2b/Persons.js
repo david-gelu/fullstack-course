@@ -8,11 +8,16 @@ const Persons = ({ personsSearch, persons, setPersons, setErrorMsg }) => {
     personService
       .deletePers(id, changedPersons)
       .then(changedPersons => {
-        setPersons(changedPersons.id !== id ? person : changedPersons)
+        setPersons(changedPersons)
       })
       .catch(error => {
         setErrorMsg(`${changedPersons} was already deleted from server`)
         setTimeout(() => { setErrorMsg(null) }, 5000)
+      })
+    personService
+      .getAll()
+      .then(changedPersons => {
+        setPersons(changedPersons)
       })
   }
 
