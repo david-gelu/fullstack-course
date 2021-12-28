@@ -4,7 +4,7 @@ const Filter = ({ persons, setPersonsSearch }) => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    persons.length && setPersonsSearch(persons.filter(person => person.name.includes(search)))
+    persons.length && setPersonsSearch(persons.filter(person => person.name.toLowerCase().includes(search)))
   }, [persons, search, setPersonsSearch])
 
   const searchName = (event) => {
