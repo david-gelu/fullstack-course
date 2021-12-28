@@ -34,7 +34,8 @@ const PersonForm = ({ setPersons, setNewName, setNewNumber, newName, newNumber, 
       if (addPerson.name === newName) window.alert(`${addPerson.name} is already added to the phonebook`)
       if (window.confirm(`${addPerson.name} is already added to the phonebook, update phone number?`)) {
         personService
-          .update(updatePersonNr.id, updatePersonNr).then(returnedPerson => {
+          .update(updatePersonNr.id, updatePersonNr)
+          .then(returnedPerson => {
             setPersons(personsSearch.map(personItem => personItem.id !== addPerson.id ? personItem : returnedPerson))
             setNewName('')
             setNewNumber('')
@@ -55,12 +56,12 @@ const PersonForm = ({ setPersons, setNewName, setNewNumber, newName, newNumber, 
           setPersons(personsSearch.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
-          setConfigMsg(
-            `${newName} was successfully added`
-          )
-          setTimeout(() => {
-            setConfigMsg(null)
-          }, 5000)
+          setConfigMsg(`${newName} was successfully added`)
+          setTimeout(() => { setConfigMsg(null) }, 5000)
+        })
+        .catch(error => {
+          setErrorMsg(`${error.response.data.error}`)
+          setTimeout(() => { setErrorMsg(null) }, 5000)
         })
     }
   }
